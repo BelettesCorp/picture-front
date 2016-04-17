@@ -3,7 +3,8 @@ import { Route, Router, IndexRoute } from 'react-router';
 import createHashHistory from 'history/lib/createHashHistory'; // Use hash history and disable auto generated "?" url parameter
 const History = createHashHistory({queryKey: false});
 
-import { Albums } from './albums/Albums.jsx';
+import Albums from './albums/Albums';
+import { Navbar } from '../components';
 
 
 /**
@@ -15,6 +16,7 @@ class Home extends React.Component {
     }
     render = () => (
         <div id="page-wrapper">
+            <Navbar/>
             {this.props.children}
         </div>
     );

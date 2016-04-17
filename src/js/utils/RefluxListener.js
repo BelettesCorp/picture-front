@@ -1,5 +1,4 @@
 /**
- * @author Romain Chivot
  * Utility class replacing 'ListenerMixin' from Reflux. Since React doesn't support mixin anymore, we need a wrapper
  * to still use Reflux.
  *
@@ -39,4 +38,4 @@ class RefluxListener {
 
 }
 
-module.exports = RefluxListener;
+export default RefluxListener;

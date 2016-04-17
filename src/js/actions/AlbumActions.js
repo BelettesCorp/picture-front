@@ -1,41 +1,14 @@
-var Reflux = require('reflux');
-var BundlesApi = require('../api/Api').bundlesApi;
+import Reflux from 'reflux';
+import { AlbumsApi  } from '../api/Api'
 
-var BundleActions = {
-    filterByProduct: Reflux.createAction(),
-    filterByName: Reflux.createAction(),
-
-    getBundles: Reflux.createAction({asyncResult: true}),
-    saveBundle: Reflux.createAction({asyncResult: true}),
-    updateBundle: Reflux.createAction({asyncResult: true}),
-    deleteBundle: Reflux.createAction({asyncResult: true}),
-
-    failed: Reflux.createAction(),
-    saveBundleFailed: Reflux.createAction()
+var AlbumActions = {
+    getAlbums:          Reflux.createAction({asyncResult: true})
 };
 
-BundleActions.getBundles.listen(function () {
-    BundlesApi.getBundles().then(function (bundles) {
-        this.completed(bundles);
-    }.bind(this)).catch(BundleActions.failed);
+AlbumActions.getAlbums.listen( function() {
+    AlbumsApi.getAlbums().done((data) => {
+        this.completed(data);
+    }).fail(this.failed);
 });
 
-BundleActions.saveBundle.listen(function (bundle) {
-    BundlesApi.saveBundle(bundle).then(function () {
-        this.completed();
-    }.bind(this)).catch(BundleActions.saveBundleFailed);
-});
-
-BundleActions.updateBundle.listen(function (bundle) {
-    BundlesApi.updateBundle(bundle).then(function () {
-        this.completed();
-    }.bind(this)).catch(BundleActions.saveBundleFailed);
-});
-
-BundleActions.deleteBundle.listen(function (bundle) {
-    BundlesApi.deleteBundle(bundle._id).then(function () {
-        this.completed();
-    }.bind(this)).catch(BundleActions.saveBundleFailed);
-});
-
-module.exports = BundleActions;
+export { AlbumActions };

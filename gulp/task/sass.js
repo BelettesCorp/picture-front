@@ -1,7 +1,7 @@
 var connect      = require('gulp-connect'),
     gulp         = require('gulp'),
     handleErrors = require('../utils/handleErrors'),
-    sass         = require('gulp-ruby-sass');
+    sass         = require('gulp-sass');
 
 require('../config');
 
